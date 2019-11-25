@@ -57,17 +57,17 @@ def new():
         brood = None
 
     for cell in ws.iter_rows(min_row=5, min_col=4, max_col=5, max_row=ws.max_row - 9):
-    # cell == (Column 4 - name, Column 5 - surname)
-    if all((c.value is None for c in cell)):
-        print('empty')
+        # cell == (Column 4 - name, Column 5 - surname)
+        if all((c.value is None for c in cell)):
+            print('empty')
 
-        # cell[0].row is the current Row
-        row_index = cell[0].row
-        column_index_to_start = 4
+            # cell[0].row is the current Row
+            row_index = cell[0].row
+            column_index_to_start = 4
 
-        for col_index, value in enumerate((voornaam, achternaam, mg, mgh, mk, mkh, pg, pgh, pk, pkh, brood, betaald), column_index_to_start):
-            ws.cell(row=row_index, column=col_index).value = value
-        break
+            for col_index, value in enumerate((voornaam, achternaam, mg, mgh, mk, mkh, pg, pgh, pk, pkh, brood, betaald), column_index_to_start):
+                ws.cell(row=row_index, column=col_index).value = value
+            break
 
 
 def start():
