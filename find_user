@@ -1,0 +1,20 @@
+import openpyxl as xl
+
+wb = xl.load_workbook('mosselen.xlsx')
+ws = wb['ZATERDAG']
+
+
+def start():
+    global ws
+    voornaam = input('Voornaam: ')
+    achternaam = input('Achternaam: ')
+
+    for row in ws.iter_rows(min_row=5, min_col=4, max_col=5, max_row=ws.max_row - 10):
+        if all((c.value is voornaam for c in row)):
+            print('Found')
+
+        else:
+            break
+
+
+start()
