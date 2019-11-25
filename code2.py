@@ -56,22 +56,18 @@ def new():
     if brood == "n":
         brood = None
 
-    row_index = 6
-    column_index_to_start = 4
-    for row in ws.iter_rows(min_row=5, min_col=4, max_col=4, max_row=ws.max_row - 9):
-        for cell in row:
-            if cell.value is None:
-                for row2 in ws.iter_rows(min_row=5, min_col=5, max_col=5, max_row=ws.max_row- 9):
-                    for cell2 in row2:
-                        if cell2.value is None:
-                            print('empty')
-                            for col_index, value in enumerate((voornaam, achternaam, mg, mgh, mk, mkh, pg, pgh, pk, pkh, brood, betaald),
-                                        column_index_to_start):
-                                ws.cell(row=row_index, column=col_index).value = value
-                        else:
-                            print('Achternaam Ingevuld')
-            else:
-                print('Voornaam ingevuld')
+    for cell in ws.iter_rows(min_row=5, min_col=4, max_col=5, max_row=ws.max_row - 9):
+    # cell == (Column 4 - name, Column 5 - surname)
+    if all((c.value is None for c in cell)):
+        print('empty')
+
+        # cell[0].row is the current Row
+        row_index = cell[0].row
+        column_index_to_start = 4
+
+        for col_index, value in enumerate((voornaam, achternaam, mg, mgh, mk, mkh, pg, pgh, pk, pkh, brood, betaald), column_index_to_start):
+            ws.cell(row=row_index, column=col_index).value = value
+        break
 
 
 def start():
